@@ -2,6 +2,12 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import Hero from '@/components/Hero'
+import Services from '@/components/Services'
+import AboutUs from '@/components/AboutUs'
+import PetProfile from '@/components/PetProfile'
+import BlogSection from '@/components/BlogSection'
 
 // Temporary user store (replace with proper auth in production)
 const useUserStore = (set: any) => ({
@@ -22,59 +28,19 @@ export default function DashboardPage() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-gray-900">Pet Shelter Dashboard</h1>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-500">Welcome, {user?.role}</span>
-            <button 
-              onClick={() => router.push('/login')}
-              className="text-sm text-blue-600 hover:underline"
-            >
-              Sign out
-            </button>
-          </div>
+    <main >
+      <div className='relative'>
+        <Hero/>
+        <div className='w-full flex justify-center absolute bottom-[-200] left-0'>
+        <Services/>
         </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        {user?.role === 'admin' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <DashboardCard 
-              title="Manage Pets"
-              description="View and manage all pets in the shelter"
-              link="/pets"
-            />
-            <DashboardCard 
-              title="Applications"
-              description="Review adoption applications"
-              link="/applications"
-            />
-            <DashboardCard 
-              title="Shelter Staff"
-              description="Manage shelter staff members"
-              link="/staff"
-            />
-          </div>
-        )}
-
-        {user?.role === 'adopter' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <DashboardCard 
-              title="Browse Pets"
-              description="Find pets available for adoption"
-              link="/pets"
-            />
-            <DashboardCard 
-              title="My Applications"
-              description="View your adoption applications"
-              link="/my-applications"
-            />
-          </div>
-        )}
-      </main>
-    </div>
+        </div>
+       
+          <AboutUs/>
+          <PetProfile/>
+          <BlogSection />
+      
+  </main>
   )
 }
 

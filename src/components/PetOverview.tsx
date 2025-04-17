@@ -42,6 +42,7 @@ interface PetDetails {
     Vaccinations: string;
     MedicalHistory: string;
     LastCheckup: string;
+    PhotoURLs: string;
   }
 const PetOverview = () => {
 
@@ -96,6 +97,7 @@ const PetOverview = () => {
           activity={pet.ActivityLevel}
           goodWithChildren={pet.GoodWithChildren ? 'Yes' : 'No'}
           goodWithOtherPets={pet.GoodWithOtherPets ? 'Yes' : 'No'}
+          PhotoURLs ={pet.PhotoURLs}
         />
           </TabsContent>
           <TabsContent value="Health Records">
@@ -107,7 +109,7 @@ const PetOverview = () => {
       </div>
 
       <Image
-        src="https://images.pexels.com/photos/11109404/pexels-photo-11109404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        src={pet.PhotoURLs}
         alt="Adoption Service"
         width={350}
         height={200}

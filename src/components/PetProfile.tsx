@@ -24,6 +24,7 @@ interface PetData {
   Species: string;
   Temperament: string;
   Weight: string;
+  PhotoURLs: string;
 }
 
 const PetProfile = () => {
@@ -62,6 +63,7 @@ const PetProfile = () => {
           species={pet.Species}
           color={pet.Color}
           arrivalDate={pet.ArrivalDate}
+          PhotoURLs ={pet.PhotoURLs}
         />
       ))}
     </div>

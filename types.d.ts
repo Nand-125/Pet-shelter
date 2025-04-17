@@ -21,7 +21,7 @@ interface Pet {
     AdoptionStatus: string;
     Age: string;
     ArrivalDate: string; // You can change this to Date if you're working with JavaScript Date objects
-    Breed: string;
+Breed: string;
     CategoryID: number;
     Color: string;
     Gender: string;
@@ -38,6 +38,7 @@ interface Pet {
     Species: string;
     Temperament: string;
     Weight: string; // Or you could use a number if it's always going to be a number
+    PhotoURLs: string;
   }
   
 

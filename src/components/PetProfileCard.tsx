@@ -18,6 +18,7 @@ interface IPetProfileCardProps {
   species: string;
   color: string;
   arrivalDate: string;
+  PhotoURLs: string;
 }
 
 const PetProfileCard = ({
@@ -26,13 +27,17 @@ const PetProfileCard = ({
   breed,
   age,
   gender,
+  species,
+  color,
+  arrivalDate,
+  PhotoURLs
 }: IPetProfileCardProps) => {
   const router = useRouter();
-
+   
   return (
     <Card className="w-[350px] flex flex-col items-start transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105 mb-1">
       <Image
-        src="https://images.pexels.com/photos/11109404/pexels-photo-11109404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        src={PhotoURLs}
         alt="Adoption Service"
         width={350}
         height={200}

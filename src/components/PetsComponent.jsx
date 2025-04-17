@@ -113,6 +113,7 @@ const PetsComponent = () => {
           species={pet.Species}
           color={pet.Color}
           arrivalDate={pet.ArrivalDate}
+          PhotoURLs={pet.PhotoURLs}
         />
       ))}
         </div>

@@ -6,7 +6,28 @@ import {
   faVenusMars,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PetDetails = () => {
+interface PetDetailsProps {
+    age: string;
+    gender: string;
+    arrivalDate: string;
+    color: string;
+    weight: number;
+    specialNeeds: string;
+    species: string;
+    size: string;
+    temperament: string;
+    lifeExpectancy: string;
+    grooming: string;
+    activity: string;
+    goodWithChildren: string;
+    goodWithOtherPets: string;
+  }
+
+const PetDetails = ({
+  age, gender, arrivalDate, color, weight, specialNeeds,
+  species, size, temperament, lifeExpectancy, grooming,
+  activity, goodWithChildren, goodWithOtherPets
+}: PetDetailsProps) => {
   return (
     <>
       <div className="flex flex-col justify-center space-y-4 text-sm text-gray-700">

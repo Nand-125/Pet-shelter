@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useEffect, useState } from 'react';
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,12 +28,35 @@ import {
 } from "@/components/ui/dropdown-menu";
 import PetProfileCard from "./PetProfileCard";
 
-// Correct type: boolean | "indeterminate"
+
+
 
 const PetsComponent = () => {
+
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [showActivityBar, setShowActivityBar] = React.useState(false);
   const [showPanel, setShowPanel] = React.useState(false);
+
+
+  const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await fetch('/api/pets');
+        const data = await response.json();
+        setPets(data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPets();
+  }, []);
+
+  if (loading) return <div>Loading pets...</div>;
 
   return (
     <section className="flex flex gap-12 sm:gap-32 xl:flex-row xl:gap-8 mt-20">
@@ -77,19 +101,20 @@ const PetsComponent = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="flex  flex-wrap gap-x-10  gap-y-5 mt-30 ml-20">
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
-            <PetProfileCard/>
+        <div className="flex  flex-wrap gap-x-10  gap-y-5 mt-30 ml-20">s
+        {pets.map(pet => (
+        <PetProfileCard 
+          key={pet.PetID}
+          id={pet.PetID}
+          name={pet.Pet_name}
+          breed={pet.Breed}
+          age={pet.Age}
+          gender={pet.Gender}
+          species={pet.Species}
+          color={pet.Color}
+          arrivalDate={pet.ArrivalDate}
+        />
+      ))}
         </div>
       </div>
     </section>

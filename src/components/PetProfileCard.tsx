@@ -1,7 +1,4 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Header from "./Header";
-import { Bebas_Neue } from "next/font/google";
+import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaw,
@@ -10,18 +7,28 @@ import {
   faVenusMars,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { Card } from "@/components/ui/card";
 
-const PetProfileCard = () => {
+interface IPetProfileCardProps {
+  id: number;
+  name: string;
+  breed: string;
+  age: string;
+  gender: string;
+  species: string;
+  color: string;
+  arrivalDate: string;
+}
+
+const PetProfileCard = ({
+  id,
+  name,
+  breed,
+  age,
+  gender,
+}: IPetProfileCardProps) => {
   const router = useRouter();
+
   return (
     <Card className="w-[350px] flex flex-col items-start transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105 mb-1">
       <Image
@@ -33,28 +40,31 @@ const PetProfileCard = () => {
       />
 
       <div className="px-4 w-full">
-        <h1 className="font-extrabold text-black text-xl">Dexter</h1>
-        <p className="text-sm text-gray-500 mt-[-2px]">Golden Retriever</p>
+        <h1 className="font-extrabold text-black text-xl">{name}</h1>
+        <p className="text-sm text-gray-500 mt-[-2px]">{breed}</p>
 
         <hr className="border-t border-gray-300 my-2" />
 
         <div className="flex items-center space-x-4 text-sm text-gray-700">
           <div className="flex items-center space-x-1">
             <FontAwesomeIcon icon={faBirthdayCake} className="text-gray-500" />
-            <span>Age: 2 Weeks</span>
+            <span>Age: {age}</span>
           </div>
           <div className="flex items-center space-x-1">
             <FontAwesomeIcon icon={faVenusMars} className="text-gray-500" />
-            <span>Gender: Male</span>
+            <span>Gender: {gender}</span>
           </div>
         </div>
 
         <div className="mt-4">
-            <span onClick={() => {
-              router.push("/dashboard/1")
-            }}className="pointer text-sm font-extralight text-green-500 hover:underline">
-              Adopt Now <FontAwesomeIcon icon={faArrowRight} />
-            </span>
+          <span
+            onClick={() => {
+              router.push(`/dashboard/${id}`);
+            }}
+            className="cursor-pointer text-sm font-extralight text-green-500 hover:underline"
+          >
+            Adopt Now <FontAwesomeIcon icon={faArrowRight} />
+          </span>
         </div>
       </div>
     </Card>

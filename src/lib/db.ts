@@ -23,4 +23,30 @@ export async function query<T = any>(sql: string, params?: any[]): Promise<Query
   }
 }
 
+export async function callProcedure<T = any>(procedureName: string, params: any[]): Promise<{ results: any[][], fields: any }> {
+  const connection = await pool.getConnection();
+  try {
+    const placeholders = params.map(() => '?').join(',');
+    const sql = `CALL ${procedureName}(${placeholders})`;
+    const [results, fields] = await connection.query(sql, params);
+    return { results: results as any[][], fields };
+  } catch (error) {
+    console.error('Procedure error:', error);
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
+export async function testConnection() {
+  try {
+    const result = await query('SELECT 1 + 1 AS test');
+    return result.results[0].test === 2;
+  } catch (error) {
+    console.error('Database connection test failed:', error);
+    return false;
+  }
+}
+
+
 export default pool;

@@ -22,6 +22,9 @@ const Header = () => {
       <Link href="/dashboard/pets">
         Pets
       </Link>
+      <Link href="/admin">
+        Admin
+      </Link>
       </div>
   
     

@@ -20,6 +20,7 @@ import PetDetails from "./PetDetails";
 import PetHealthRecords from "./PetHealthRecords";
 import { Button } from "./ui/button";
 import ApplicationFormDialog from "./ApplicationFormDialog";
+import AdminApplicationFormDialog from "./AdminApplicationFormDialog";
 
 interface PetDetails {
     PetID: number;
@@ -45,7 +46,7 @@ interface PetDetails {
     LastCheckup: string;
     PhotoURLs: string;
   }
-const PetOverview = () => {
+const AdminPetOverview = () => {
 
     const params = useParams();
   const [pet, setPet] = useState<PetDetails | null>(null);
@@ -106,7 +107,7 @@ const PetOverview = () => {
           </TabsContent>
         </Tabs>
 
-        <ApplicationFormDialog petId={pet.PetID} />
+        <AdminApplicationFormDialog petId={pet.PetID} />
       </div>
 
       <Image
@@ -120,4 +121,4 @@ const PetOverview = () => {
   );
 };
 
-export default PetOverview;
+export default AdminPetOverview;

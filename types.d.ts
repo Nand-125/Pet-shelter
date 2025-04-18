@@ -41,6 +41,14 @@ Breed: string;
     PhotoURLs: string;
   }
   
+  interface AdHistory{
+
+  Pet_name: string;
+  App_Status: 'Pending' | 'Approved' | 'Rejected' | 'Withdrawn';
+  meetUp_Status: 'Scheduled' | 'Completed' | 'Cancelled' | null;
+  MeetupDate: string | null; // ISO date string
+  MeetupLocation: string | null;
+  }
 
 
   type ApplicationStatus = "Pending" | "Approved" | "Rejected";

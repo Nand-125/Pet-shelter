@@ -16,7 +16,28 @@ export interface Adopter {
   EncryptionKeyVersion: number;
 }
 
+
 export interface QueryResult<T = any> {
   results: T[];
   fields?: FieldPacket[];
+}
+
+export interface ApplicationHistory {
+  applicationId: number;
+  petName: string;
+  petPhoto: string;
+  status: "Pending" | "Approved" | "Rejected" | "Withdrawn";
+  applicationDate: string;
+  meetupDate?: string;
+  meetupLocation?: string;
+  meetupStatus?: "Scheduled" | "Completed" | "Cancelled";
+}
+
+export interface AdoptionHistory {
+  petId: number;
+  petName: string;
+  adoptionDate: string;
+  shelterName: string;
+  breed: string;
+  age: string;
 }

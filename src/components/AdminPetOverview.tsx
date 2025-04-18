@@ -1,26 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-// import PetCover from "@/components/PetCover";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  faPaw,
-  faArrowRight,
-  faBirthdayCake,
-  faVenusMars,
-} from "@fortawesome/free-solid-svg-icons";
 import PetDetails from "./PetDetails";
 import PetHealthRecords from "./PetHealthRecords";
 import { Button } from "./ui/button";
-import ApplicationFormDialog from "./ApplicationFormDialog";
 import AdminApplicationFormDialog from "./AdminApplicationFormDialog";
 
 const AdminPetOverview = () => {
   const params = useParams();
+  const router = useRouter();
   const [pet, setPet] = useState<PetDetails | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +30,34 @@ const AdminPetOverview = () => {
 
     if (params.id) fetchPet();
   }, [params.id]);
+
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(`/api/delete-pet/${params.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      });
+  
+      let responseData: { error?: string } = {};
+  
+      try {
+        responseData = await res.json();
+      } catch (jsonError) {
+        console.warn("Response body was not valid JSON.");
+      }
+  
+      if (res.ok) {
+        alert("Pet deleted successfully.");
+        router.push("/admin/dashboard");
+      } else {
+        alert(`Error deleting pet: ${responseData.error || res.statusText || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Error deleting pet:", error);
+      alert("Failed to connect to server. Please try again later.");
+    }
+  };
+  
 
   if (loading) return <div>Loading pet details...</div>;
   if (!pet) return <div>Pet not found</div>;
@@ -84,9 +103,13 @@ const AdminPetOverview = () => {
         </Tabs>
 
         <AdminApplicationFormDialog petId={pet.PetID} />
-        <Button className="w-full mt-10 bg-red-500 text-white mb-10">Delete This Pet</Button>
+        <Button
+          className="w-full mt-10 bg-red-500 text-white mb-10"
+          onClick={handleDelete}
+        >
+          Delete This Pet
+        </Button>
       </div>
-    
 
       <Image
         src={pet.PhotoURLs}

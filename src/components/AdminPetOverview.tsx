@@ -108,7 +108,9 @@ const AdminPetOverview = () => {
         </Tabs>
 
         <AdminApplicationFormDialog petId={pet.PetID} />
+        <Button className="w-full mt-10 bg-red-500 text-white mb-10">Delete This Pet</Button>
       </div>
+    
 
       <Image
         src={pet.PhotoURLs}

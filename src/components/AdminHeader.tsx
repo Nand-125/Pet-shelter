@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const Header = () => {
+const AdminHeader = () => {
 
   return (
     <header className="my-5 w-full flex justify-between ">
     <div className="ml-50 flex justity-between gap-x-6 mt-5 text-black-500">
     
-      <Link href="/dashboard">
+      <Link href="/admin">
         Home
       </Link>
-      <Link href="/dashboard">
+      <Link href="/admin">
         About
       </Link>
-      <Link href="/dashboard/account">
+      <Link href="/admin/account">
         Your Account
       </Link>
       <Link href="/dashboard/blogs">
@@ -22,10 +22,6 @@ const Header = () => {
       <Link href="/dashboard/pets">
         Pets
       </Link>
-      <Link href="/admin">
-        admin
-      </Link>
-
       </div>
   
     
@@ -39,4 +35,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;

@@ -68,7 +68,7 @@ const AdminPetProfileCard = ({
             }}
             className="cursor-pointer text-sm font-extralight text-green-500 hover:underline"
           >
-            Adopt Now <FontAwesomeIcon icon={faArrowRight} />
+            Edit details <FontAwesomeIcon icon={faArrowRight} />
           </span>
         </div>
       </div>

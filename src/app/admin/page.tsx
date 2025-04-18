@@ -9,6 +9,7 @@ import AboutUs from '@/components/AboutUs'
 import PetProfile from '@/components/PetProfile'
 import BlogSection from '@/components/BlogSection'
 import AdminPetProfile from '@/components/AdminPetProfile'
+import AdminHero from '@/components/AdminHero'
 
 // Temporary user store (replace with proper auth in production)
 const useUserStore = (set: any) => ({
@@ -31,7 +32,7 @@ export default function DashboardPage() {
   return (
     <main >
       <div className='relative'>
-        <Hero/>
+        <AdminHero/>
         <div className='w-full flex justify-center absolute bottom-[-200] left-0'>
         <Services/>
         </div>

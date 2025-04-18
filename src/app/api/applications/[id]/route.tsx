@@ -6,9 +6,16 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    // Get user ID from session or token (you'll need to implement this)
-    const userId = 1; // Replace with actual user ID from session
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get('userId');
     
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'User ID is required' },
+        { status: 400 }
+      );
+    }
+
     // First update the application status
     await query(
       `UPDATE Application SET App_Status = 'Withdrawn' 

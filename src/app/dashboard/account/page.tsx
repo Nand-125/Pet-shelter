@@ -1,4 +1,4 @@
-
+'use client'
 import Account from "@/components/Account";
 import Header from "@/components/Header";
 

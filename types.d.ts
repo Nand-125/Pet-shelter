@@ -16,6 +16,31 @@ interface Pet {
     coverUrl: string;
   }
 
+  interface PetDetails {
+      PetID: number;
+      Pet_name: string;
+      Breed: string;
+      Age: string;
+      Gender: string;
+      ArrivalDate: string;
+      Color: string;
+      Weight: number;
+      SpecialNeeds: string;
+      Species: string;
+      SizeCategory: string;
+      Temperament: string;
+      LifeExpectancyMin: number;
+      LifeExpectancyMax: number;
+      GroomingNeeds: string;
+      ActivityLevel: string;
+      GoodWithChildren: boolean;
+      GoodWithOtherPets: boolean;
+      Vaccinations: string;
+      MedicalHistory: string;
+      LastCheckup: string;
+      PhotoURLs: string;
+    }
+
   interface PetData {
     ActivityLevel: string;
     AdoptionStatus: string;
@@ -49,6 +74,19 @@ Breed: string;
   MeetupDate: string | null; // ISO date string
   MeetupLocation: string | null;
   }
+
+
+  interface PetAdoptionApplicationStatus {
+    applicationId: number;
+    petName: string;
+    petPhoto: string;
+    status: string;
+    ApplicationDate: string;
+    meetupDate: string | null;
+    meetupLocation: string | null;
+    meetupStatus: string | null;
+  }
+
 
 
   type ApplicationStatus = "Pending" | "Approved" | "Rejected";

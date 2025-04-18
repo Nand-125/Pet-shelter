@@ -3,9 +3,17 @@ import { query } from '@/lib/db';
 
 export async function GET(request: Request) {
   try {
-    // Get user ID from session or token (you'll need to implement this)
-    const userId = 1; // Replace with actual user ID from session
-    
+    const { searchParams } = new URL(request.url);
+    //const userId = searchParams.get('userId');
+     const userId = 1;
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'User ID is required' },
+        { status: 400 }
+      );
+    }
+
     const result = await query<{
       petId: number;
       petName: string;

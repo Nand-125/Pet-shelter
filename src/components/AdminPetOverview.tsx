@@ -1,14 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 // import PetCover from "@/components/PetCover";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    Dialog,
-    DialogTrigger,
-  } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   faPaw,
@@ -22,33 +19,8 @@ import { Button } from "./ui/button";
 import ApplicationFormDialog from "./ApplicationFormDialog";
 import AdminApplicationFormDialog from "./AdminApplicationFormDialog";
 
-interface PetDetails {
-    PetID: number;
-    Pet_name: string;
-    Breed: string;
-    Age: string;
-    Gender: string;
-    ArrivalDate: string;
-    Color: string;
-    Weight: number;
-    SpecialNeeds: string;
-    Species: string;
-    SizeCategory: string;
-    Temperament: string;
-    LifeExpectancyMin: number;
-    LifeExpectancyMax: number;
-    GroomingNeeds: string;
-    ActivityLevel: string;
-    GoodWithChildren: boolean;
-    GoodWithOtherPets: boolean;
-    Vaccinations: string;
-    MedicalHistory: string;
-    LastCheckup: string;
-    PhotoURLs: string;
-  }
 const AdminPetOverview = () => {
-
-    const params = useParams();
+  const params = useParams();
   const [pet, setPet] = useState<PetDetails | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -59,12 +31,12 @@ const AdminPetOverview = () => {
         const data = await response.json();
         setPet(data);
       } catch (error) {
-        console.error('Error fetching pet:', error);
+        console.error("Error fetching pet:", error);
       } finally {
         setLoading(false);
       }
     };
-    
+
     if (params.id) fetchPet();
   }, [params.id]);
 
@@ -84,26 +56,30 @@ const AdminPetOverview = () => {
             <TabsTrigger value="Health Records">Health Records</TabsTrigger>
           </TabsList>
           <TabsContent value="Details">
-          <PetDetails 
-          age={pet.Age}
-          gender={pet.Gender}
-          arrivalDate={pet.ArrivalDate}
-          color={pet.Color}
-          weight={pet.Weight}
-          specialNeeds={pet.SpecialNeeds}
-          species={pet.Species}
-          size={pet.SizeCategory}
-          temperament={pet.Temperament}
-          lifeExpectancy={`${pet.LifeExpectancyMin}-${pet.LifeExpectancyMax} years`}
-          grooming={pet.GroomingNeeds}
-          activity={pet.ActivityLevel}
-          goodWithChildren={pet.GoodWithChildren ? 'Yes' : 'No'}
-          goodWithOtherPets={pet.GoodWithOtherPets ? 'Yes' : 'No'}
-          PhotoURLs ={pet.PhotoURLs}
-        />
+            <PetDetails
+              age={pet.Age}
+              gender={pet.Gender}
+              arrivalDate={pet.ArrivalDate}
+              color={pet.Color}
+              weight={pet.Weight}
+              specialNeeds={pet.SpecialNeeds}
+              species={pet.Species}
+              size={pet.SizeCategory}
+              temperament={pet.Temperament}
+              lifeExpectancy={`${pet.LifeExpectancyMin}-${pet.LifeExpectancyMax} years`}
+              grooming={pet.GroomingNeeds}
+              activity={pet.ActivityLevel}
+              goodWithChildren={pet.GoodWithChildren ? "Yes" : "No"}
+              goodWithOtherPets={pet.GoodWithOtherPets ? "Yes" : "No"}
+              PhotoURLs={pet.PhotoURLs}
+            />
           </TabsContent>
           <TabsContent value="Health Records">
-            <PetHealthRecords />
+            <PetHealthRecords
+              vaccinations={pet.Vaccinations}
+              medicalHistory={pet.MedicalHistory}
+              lastCheckUp={pet.LastCheckup}
+            />
           </TabsContent>
         </Tabs>
 
